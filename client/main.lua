@@ -2,6 +2,14 @@ local currentRange = 1
 local showUI = false
 local hideTimer = 0
 
+-- Hex-Farbe in RGB-Werte umwandeln
+function HexToRGB(hex)
+    hex = hex:gsub('#', '')
+    return tonumber(hex:sub(1, 2), 16),
+           tonumber(hex:sub(3, 4), 16),
+           tonumber(hex:sub(5, 6), 16)
+end
+
 -- Tastenbelegung im GTA V Tastenbelegungssystem registrieren
 -- Spieler können die Taste unter Einstellungen > Tastenbelegung > FiveM ändern
 RegisterKeyMapping('voice_range_cycle', 'Sprech-Reichweite ändern', 'keyboard', Config.DefaultKey)
@@ -105,5 +113,39 @@ CreateThread(function()
 
     if Config.AlwaysShow then
         ShowRangeIndicator()
+    end
+end)
+
+-- Ring/Radius um den Spieler herum zeichnen
+CreateThread(function()
+    while true do
+        if Config.ShowRing then
+            local rangeData = Config.Ranges[currentRange]
+            if rangeData and rangeData.distance then
+                local ped = PlayerPedId()
+                local pos = GetEntityCoords(ped)
+                local r, g, b = HexToRGB(rangeData.color)
+                local diameter = rangeData.distance * 2.0
+
+                -- DrawMarker Typ 1 = Zylinder, als flacher Ring auf dem Boden
+                DrawMarker(
+                    1,                      -- Typ: Zylinder
+                    pos.x, pos.y, pos.z - 1.0, -- Position (leicht unter dem Boden für flachen Ring)
+                    0.0, 0.0, 0.0,         -- Richtung
+                    0.0, 0.0, 0.0,         -- Rotation
+                    diameter, diameter, 0.5, -- Größe (Durchmesser x Durchmesser x Höhe)
+                    r, g, b, Config.RingOpacity, -- Farbe + Deckkraft
+                    false,                  -- Bob (auf/ab Bewegung)
+                    false,                  -- FaceCamera
+                    2,                      -- p19
+                    false,                  -- Rotate
+                    nil, nil,               -- Texture dict/name
+                    false                   -- DrawOnEnts
+                )
+            end
+            Wait(0) -- Jeden Frame zeichnen
+        else
+            Wait(500) -- Weniger CPU wenn Ring deaktiviert
+        end
     end
 end)
