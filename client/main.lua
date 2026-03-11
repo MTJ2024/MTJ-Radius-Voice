@@ -58,18 +58,19 @@ function HideRangeIndicator()
     })
 end
 
--- pmavoice State überwachen und Auto-Hide
+-- Proximity-Änderungen von pmavoice per State-Bag-Handler erkennen
+AddStateBagChangeHandler('proximity', ('player:%s'):format(GetPlayerServerId(PlayerId())), function(_bagName, _key, value)
+    if value and value.index and value.index ~= currentRange then
+        currentRange = value.index
+        UpdateRangeDisplay()
+        ShowRangeIndicator()
+    end
+end)
+
+-- Auto-Hide Timer
 CreateThread(function()
     while true do
-        Wait(200)
-
-        -- Proximity-Änderungen von pmavoice erkennen (z.B. durch andere Scripts)
-        local proximity = LocalPlayer.state.proximity
-        if proximity and proximity.index and proximity.index ~= currentRange then
-            currentRange = proximity.index
-            UpdateRangeDisplay()
-            ShowRangeIndicator()
-        end
+        Wait(500)
 
         -- Automatisches Ausblenden nach Ablauf der Anzeigedauer
         if showUI and not Config.AlwaysShow and GetGameTimer() > hideTimer then
@@ -87,11 +88,17 @@ end)
 
 -- Initialisierung beim Ressourcenstart
 CreateThread(function()
-    Wait(1000) -- Warten bis pmavoice initialisiert ist
-
-    local proximity = LocalPlayer.state.proximity
-    if proximity and proximity.index then
-        currentRange = proximity.index
+    -- Warten bis pmavoice initialisiert ist (mit Retry-Logik)
+    local retries = 0
+    local maxRetries = 20
+    while retries < maxRetries do
+        local proximity = LocalPlayer.state.proximity
+        if proximity and proximity.index then
+            currentRange = proximity.index
+            break
+        end
+        retries = retries + 1
+        Wait(500)
     end
 
     UpdateRangeDisplay()

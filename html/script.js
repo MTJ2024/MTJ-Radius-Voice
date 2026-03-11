@@ -23,7 +23,7 @@ function updateRangeDisplay(data) {
     nameEl.textContent = data.rangeName;
     nameEl.style.color = data.rangeColor;
 
-    var percentage = (data.rangeLevel / data.maxLevel) * 100;
+    var percentage = data.maxLevel > 0 ? (data.rangeLevel / data.maxLevel) * 100 : 0;
     levelEl.style.width = percentage + '%';
     levelEl.style.backgroundColor = data.rangeColor;
     levelEl.style.boxShadow = '0 0 10px ' + data.rangeColor;
