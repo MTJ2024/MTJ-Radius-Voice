@@ -25,4 +25,4 @@ Config.AlwaysShow = false
 Config.ShowRing = true
 
 -- Deckkraft des Rings (0-255, höher = sichtbarer)
-Config.RingOpacity = 100
+Config.RingOpacity = 180

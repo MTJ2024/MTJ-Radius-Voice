@@ -117,9 +117,11 @@ CreateThread(function()
 end)
 
 -- Ring/Radius um den Spieler herum zeichnen
+-- Ring ist nur sichtbar wenn showUI aktiv ist (nach Reichweiten-Wechsel)
+-- und verschwindet zusammen mit der UI-Anzeige nach Config.DisplayDuration
 CreateThread(function()
     while true do
-        if Config.ShowRing then
+        if Config.ShowRing and showUI then
             local rangeData = Config.Ranges[currentRange]
             if rangeData and rangeData.distance then
                 local ped = PlayerPedId()
@@ -145,7 +147,7 @@ CreateThread(function()
             end
             Wait(0) -- Jeden Frame zeichnen
         else
-            Wait(500) -- Weniger CPU wenn Ring deaktiviert
+            Wait(500) -- Weniger CPU wenn Ring deaktiviert oder ausgeblendet
         end
     end
 end)

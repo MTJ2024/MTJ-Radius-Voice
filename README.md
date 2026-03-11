@@ -44,7 +44,7 @@ Config.DefaultKey = "LMENU"        -- Standard-Taste Alt (im Spiel änderbar)
 Config.DisplayDuration = 3000      -- Anzeigedauer in Millisekunden
 Config.AlwaysShow = false          -- Immer sichtbar oder nur beim Wechseln
 Config.ShowRing = true             -- Radius-Ring auf dem Boden anzeigen
-Config.RingOpacity = 100           -- Deckkraft des Rings (0-255)
+Config.RingOpacity = 180           -- Deckkraft des Rings (0-255)
 ```
 
 ## Tastenbelegung
