@@ -39,14 +39,14 @@ Config.Ranges = {
     { name = "Schreien",  color = "#2ecc71" },     -- Grün
 }
 
-Config.DefaultKey = "F3"           -- Standard-Taste (im Spiel änderbar)
+Config.DefaultKey = "LMENU"        -- Standard-Taste Alt (im Spiel änderbar)
 Config.DisplayDuration = 3000      -- Anzeigedauer in Millisekunden
 Config.AlwaysShow = false          -- Immer sichtbar oder nur beim Wechseln
 ```
 
 ## Tastenbelegung
 
-- Standard-Taste: **F3** (zum Wechseln der Sprech-Reichweite)
+- Standard-Taste: **Alt** (zum Wechseln der Sprech-Reichweite)
 - Die Taste kann im Spiel unter **Einstellungen → Tastenbelegung → FiveM** geändert werden
 
 ## Lizenz

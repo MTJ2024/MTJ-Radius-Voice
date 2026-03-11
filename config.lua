@@ -11,7 +11,7 @@ Config.Ranges = {
 
 -- Standard-Taste zum Wechseln der Reichweite
 -- Kann im Spiel unter Einstellungen > Tastenbelegung > FiveM geändert werden
-Config.DefaultKey = "F3"
+Config.DefaultKey = "LMENU"
 
 -- Anzeigedauer nach dem Wechseln der Reichweite (in Millisekunden)
 Config.DisplayDuration = 3000
