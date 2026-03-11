@@ -1,0 +1,78 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: transparent;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#voice-range-container {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#voice-range-container.hidden {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+    pointer-events: none;
+}
+
+#voice-range-container.visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+#voice-range-indicator {
+    display: flex;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.75);
+    border-radius: 12px;
+    padding: 10px 20px;
+    gap: 12px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: border-color 0.3s ease;
+}
+
+#voice-icon {
+    font-size: 24px;
+    transition: color 0.3s ease;
+}
+
+#voice-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+#voice-range-name {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
+
+#voice-range-bar {
+    width: 120px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+#voice-range-level {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
